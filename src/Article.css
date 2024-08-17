@@ -1,0 +1,30 @@
+.glide {
+    max-width: 50rem;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.glide-slide {
+    background-color: cornsilk;
+    border-radius: .75rem;
+    padding:1rem;
+    box-shadow: 0 .1rem .5rem rgba(0, 0, 0, 0.1);
+    text-align:center;
+}
+
+.glide-slide h2 {
+    font-size: 1.5rem;
+    margin-bottom:.7rem;
+}
+
+.glide-slide img{
+    max-width:100%;
+    height: auto; 
+    margin-bottom:.7rem;
+    border-radius:.3rem;
+}
+
+.glide-slide p {
+    font-size:1rem;
+    color:black
+}
