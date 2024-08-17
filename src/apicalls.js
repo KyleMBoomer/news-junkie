@@ -8,11 +8,9 @@ export const getArticles = async () => {
             throw new Error ('Failed to fetch your papers.')
         }
         const data = await res.json()
-        console.log(data)
         return data.articles
     } catch(error) {
         console.error('Failed to fetch data because:', error.message)
         return []
     }
 }
-//https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=${api}

@@ -4,7 +4,6 @@ const ArticleDetails = () => {
     const { state } = useLocation()
     const { article } = state || {}
 
-    console.log('Article Details:', article)
 
     if (!article) {
         return <p> No article data found. </p>
@@ -16,7 +15,8 @@ const ArticleDetails = () => {
             <p><strong>Source:</strong>{article.source?.name}</p>
             <p><strong>Date:</strong>{new Date(article.publishedAt).toLocaleDateString()}</p>
             {article.content ? (
-                <p>{article.content}</p>
+                <p>{article.content.split('[+')[0]}
+                You can read the full article <a href={article.url} target="_blank" rel="noopener noreferrer">here</a>.</p>
             ) : (
                 <p>
                     The full content of this article is not available.
