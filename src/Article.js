@@ -27,7 +27,7 @@ const Article = () => {
                 perView: 2,
                 gap: 20,
                 focusAt: 'center',
-                autoplay: 5000
+                autoplay: 5000,
             }).mount()
         }
     }, [articles])
@@ -38,6 +38,11 @@ const Article = () => {
 
     return (
         <div className="glide">
+            <h2>Today's Stories:</h2>
+            <div className="glide__arrows" data-glide-el="controls">
+                <button className="glide__arrow glide__arrow--left" data-glide-dir="<">‹</button>
+                <button className="glide__arrow glide__arrow--right" data-glide-dir=">">›</button>
+            </div>
             <div className="glide__track" data-glide-el="track">
                 <ul className="glide__slides">
                     {articles.map((article, index) => (
