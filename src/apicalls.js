@@ -1,6 +1,6 @@
 
 export const getArticles = async () => {
-    const api = process.env.REACT_APP_API_KEY
+    const api = process.env.REACT_APP_NEWS_API_KEY
     const url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${api}`
     try {
         const res = await fetch(`${url}`)
