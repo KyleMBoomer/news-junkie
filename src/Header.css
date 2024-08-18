@@ -1,6 +1,9 @@
-.header-link {
-    font-size:x-large;
+h1 {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    background-color: black;
+    justify-content: center;
+    padding:1rem;
+    font-size: x-large;
+    background-color:bisque;
 }

@@ -24,7 +24,7 @@ const Article = () => {
             new Glide('.glide', {
                 type: 'carousel',
                 startAt: 0,
-                perView: 2,
+                perView: 1,
                 gap: 20,
                 focusAt: 'center',
                 autoplay: 5000,
@@ -38,7 +38,7 @@ const Article = () => {
 
     return (
         <div className="glide">
-            <h2>Today's Stories:</h2>
+            <h2 className="glide-header">Today's Stories:</h2>
             <div className="glide__arrows" data-glide-el="controls">
                 <button className="glide__arrow glide__arrow--left" data-glide-dir="<">‹</button>
                 <button className="glide__arrow glide__arrow--right" data-glide-dir=">">›</button>

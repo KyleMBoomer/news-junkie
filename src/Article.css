@@ -5,7 +5,7 @@
     padding: 1rem;
 }
 
-.glide h2 {
+.glide-header {
     text-align: center;
     text-decoration: underline;
 }
@@ -27,14 +27,14 @@
 }
 
 .glide-slide h2 {
-    font-size: 1.5rem;
-    margin-bottom:.7rem;
+    font-size: 1rem;
+    margin-bottom:1rem;
 }
 
 .glide-slide img{
-    max-width:100%;
+    max-width:80%;
     height: 10rem; 
-    object-fit: cover;
+    object-fit:contain;
     margin-bottom:.7rem;
     border-radius:.3rem;
 }
