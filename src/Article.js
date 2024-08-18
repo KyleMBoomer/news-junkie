@@ -8,6 +8,8 @@ import './Article.css'
 
 const Article = () => {
     const [articles, setArticles] = useState([])
+    const [sortedArticles, setSortedArticles] = useState([])
+    const [sort, setSort] = useState('newest')
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -20,40 +22,67 @@ const Article = () => {
     }, [])
 
     useEffect(() => {
-        if (articles.length) {
+        const sortArticles = (articles, option) => {
+            const sortedArticles = [...articles].sort((a, b) => {
+                const dateA = new Date(a.publishedAt)
+                const dateB = new Date(b.publishedAt)
+                return option === 'newest' ? dateB - dateA : dateA - dateB
+            })
+            console.log('After Sorting:', sortedArticles)
+            setSortedArticles(sortedArticles)
+        }
+
+        sortArticles(articles, sort)
+    }, [articles, sort])
+
+    useEffect(() => {
+        if (sortedArticles.length) {
             new Glide('.glide', {
                 type: 'carousel',
                 startAt: 0,
-                perView: 2,
+                perView: 1,
                 gap: 20,
                 focusAt: 'center',
                 autoplay: 5000,
             }).mount()
         }
-    }, [articles])
+    }, [sortedArticles])
 
     const handleClick = (article) => {
         navigate(`/article/${article.title}`, { state: { article } })
     }
 
+    const handleSort = (event) => {
+        setSort(event.target.value)
+    }
+
     return (
-        <div className="glide">
-            <h2>Today's Stories:</h2>
-            <div className="glide__arrows" data-glide-el="controls">
-                <button className="glide__arrow glide__arrow--left" data-glide-dir="<">‹</button>
-                <button className="glide__arrow glide__arrow--right" data-glide-dir=">">›</button>
+        <div>
+            <div className="sort-form">
+                <label htmlFor="sort">Sort by:</label>
+                <select id="sort" value={sort} onChange={handleSort}>
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                </select>
             </div>
-            <div className="glide__track" data-glide-el="track">
-                <ul className="glide__slides">
-                    {articles.map((article, index) => (
-                        <li key={index} className="glide__slide" onClick={() => handleClick(article)}>
-                            <h2>{article.title}</h2>
-                            {article.urlToImage && <img src={article.urlToImage} alt={article.title} />}
-                            <p>{article.description}</p>
-                            <p><small>{new Date(article.publishedAt).toLocaleDateString()}</small></p>
-                        </li>
-                    ))}
-                </ul>
+            <div className="glide">
+                <h2 className="glide-header">Today's Stories:</h2>
+                <div className="glide__arrows" data-glide-el="controls">
+                    <button className="glide__arrow glide__arrow--left" data-glide-dir="<">‹</button>
+                    <button className="glide__arrow glide__arrow--right" data-glide-dir=">">›</button>
+                </div>
+                <div className="glide__track" data-glide-el="track">
+                    <ul className="glide__slides">
+                        {articles.map((article, index) => (
+                            <li key={index} className="glide__slide" onClick={() => handleClick(article)}>
+                                <h2>{article.title}</h2>
+                                {article.urlToImage && <img src={article.urlToImage} alt={article.title} />}
+                                <p>{article.description}</p>
+                                <p><small>{new Date(article.publishedAt).toLocaleDateString()}</small></p>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </div>
         </div>
     )
