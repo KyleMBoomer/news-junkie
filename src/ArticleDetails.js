@@ -1,8 +1,6 @@
 import { useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { JSDOM } from 'jsdom'
-import { Readability } from '@mozilla/readability'
 
 const ArticleDetails = () => {
     const { state } = useLocation()
@@ -14,16 +12,18 @@ const ArticleDetails = () => {
             const fetchContent = async () => {
                 try {
                     const res = await axios.get(article.url)
-                    const dom = new JSDOM(res.data, { url: article.url })
-                    const parsedArticle = new Readability(dom.window.document).parse()
-                    setFullContent(parsedArticle.textContent)
+                    const parser = new DOMParser()
+                    const doc = parser.parseFromString(res.data, 'text/html')
+                    const articleContent = doc.querySelector('article')?.textContent || 'No content found.'
+                    console.log('article', articleContent)
+                    setFullContent(articleContent)
                 } catch (error) {
                     console.error('Could not fetch your content:', error)
                 }
             }
             fetchContent()
         }
-    }, [article])
+    }, [article.url])
 
 
     if (!article) {
