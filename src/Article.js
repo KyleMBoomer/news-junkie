@@ -8,6 +8,7 @@ import './Article.css'
 
 const Article = () => {
     const [articles, setArticles] = useState([])
+    const [sortedArticles, setSortedArticles] = useState([])
     const [sort, setSort] = useState('newest')
     const navigate = useNavigate()
 
@@ -18,19 +19,24 @@ const Article = () => {
         }
 
         fetchArticles()
-    }, [sort])
-
-    const sortArticles = (articles, option) => {
-        const sortedArticles = [...articles].sort((a, b) => {
-            const dateA = new Date(a.publishedAt)
-            const dateB = new Date(b.publishedAt)
-            return option === 'newest' ? dateB - dateA : dateA - dateB
-        })
-        setArticles(sortedArticles)
-    }
+    }, [])
 
     useEffect(() => {
-        if (articles.length) {
+        const sortArticles = (articles, option) => {
+            const sortedArticles = [...articles].sort((a, b) => {
+                const dateA = new Date(a.publishedAt)
+                const dateB = new Date(b.publishedAt)
+                return option === 'newest' ? dateB - dateA : dateA - dateB
+            })
+            console.log('After Sorting:', sortedArticles)
+            setSortedArticles(sortedArticles)
+        }
+
+        sortArticles(articles, sort)
+    }, [articles, sort])
+
+    useEffect(() => {
+        if (sortedArticles.length) {
             new Glide('.glide', {
                 type: 'carousel',
                 startAt: 0,
@@ -40,7 +46,7 @@ const Article = () => {
                 autoplay: 5000,
             }).mount()
         }
-    }, [articles])
+    }, [sortedArticles])
 
     const handleClick = (article) => {
         navigate(`/article/${article.title}`, { state: { article } })

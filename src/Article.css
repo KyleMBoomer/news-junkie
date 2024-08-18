@@ -13,7 +13,8 @@
     display:flex;
     align-items: center;
     height:15rem;
-    width:10rem;
+    width:100%;
+    overflow-x: auto;
 }
 .glide-slide {
     height:15rem;
@@ -24,6 +25,7 @@
     text-align:center;
     border: .2rem solid red;
     cursor:pointer;
+    margin-right:1rem;
 }
 
 .glide-slide h2 {
@@ -64,3 +66,50 @@
   .glide__arrow:hover {
     background-color: #555;
   }
+
+  @media (max-width: 64rem) {
+    .glide {
+        max-width: 90%;
+        height: 15rem; 
+    }
+    
+    .glide-slide {
+        height: 12rem;
+        margin-right: 0.5rem; 
+    }
+    
+    .glide-slide h2 {
+        font-size: 0.875rem; 
+    }
+
+    .glide-slide img {
+        height: 8rem; 
+    }
+    
+    .glide__arrows {
+        top: -2rem; 
+    }
+}
+
+@media (max-width: 40rem) {
+    .glide {
+        height: 12rem;
+    }
+    
+    .glide-slide {
+        height: 10rem; 
+        margin-right: 0.25rem;
+    }
+    
+    .glide-slide h2 {
+        font-size: 0.75rem; 
+    }
+
+    .glide-slide img {
+        height: 6rem; 
+    }
+    
+    .glide__arrows {
+        top: -1rem; 
+    }
+}
